@@ -3,6 +3,7 @@
 import assert from 'assert';
 import { IS_PLAYING } from '../../app/actions/isPlaying';
 import { IS_PAUSED } from '../../app/actions/isPaused';
+import { HAS_STOPPED } from '../../app/actions/hasStopped';
 import { setPlaybackState as playbackReducer } from '../../app/reducers/playback';
 
 describe('playbackState', () => {
@@ -11,7 +12,7 @@ describe('playbackState', () => {
       assert.strictEqual(playbackReducer(undefined, '').isPlaying, false);
     });
 
-    it('{isPlaying: true, isPaused: false} when isPlaying is true', () => {
+    it('{isPlaying: true, isPaused: false} when action.isPlaying is true', () => {
       const state = playbackReducer(undefined, {
         type: IS_PLAYING,
         isPlaying: true
@@ -20,7 +21,7 @@ describe('playbackState', () => {
       assert.strictEqual(state.isPaused, false);
     });
 
-    it('{isPlaying: false, isPaused: true} when isPlaying is false', () => {
+    it('{isPlaying: false, isPaused: true} when action.isPlaying is false', () => {
       const state = playbackReducer(undefined, {
         type: IS_PLAYING,
         isPlaying: false
@@ -35,7 +36,7 @@ describe('playbackState', () => {
       assert.strictEqual(playbackReducer(undefined, '').isPaused, false);
     });
 
-    it('{isPlaying: false, isPaused: true} when isPaused is true', () => {
+    it('{isPlaying: false, isPaused: true} when action.isPaused is true', () => {
       const state = playbackReducer(undefined, {
         type: IS_PAUSED,
         isPaused: true
@@ -44,13 +45,35 @@ describe('playbackState', () => {
       assert.strictEqual(state.isPlaying, false);
     });
 
-    it('{isPlaying: true, isPaused: false} when isPaused is false', () => {
+    it('{isPlaying: true, isPaused: false} when action.isPaused is false', () => {
       const state = playbackReducer(undefined, {
         type: IS_PAUSED,
         isPaused: false
       });
       assert.strictEqual(state.isPaused, false);
       assert.strictEqual(state.isPlaying, true);
+    });
+  });
+
+  describe('hasStopped property', () => {
+    it('defaults to true', () => {
+      assert.strictEqual(playbackReducer(undefined, '').hasStopped, true);
+    });
+
+    it('{hasStopped: true} when action.hasStopped is true', () => {
+      const state = playbackReducer(undefined, {
+        type: HAS_STOPPED,
+        hasStopped: true
+      });
+      assert.strictEqual(state.hasStopped, true);
+    });
+
+    it('{hasStopped: false} when action.hasStopped is false', () => {
+      const state = playbackReducer(undefined, {
+        type: HAS_STOPPED,
+        hasStopped: false
+      });
+      assert.strictEqual(state.hasStopped, false);
     });
   });
 });
