@@ -11,11 +11,13 @@ const initialState = {
 export function setPlaybackState(state = initialState, action) {
   switch (action.type) {
     case IS_PLAYING :
-      return Object.assign(state, {
-        isPlaying: action.isPlaying
+      return Object.assign({}, state, {
+        isPlaying: action.isPlaying,
+        isPaused: !action.isPlaying
       });
     case IS_PAUSED :
-      return Object.assign(state, {
+      return Object.assign({}, state, {
+        isPlaying: !action.isPaused,
         isPaused: action.isPaused
       });
     default:

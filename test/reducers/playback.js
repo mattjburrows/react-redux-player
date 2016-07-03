@@ -11,18 +11,22 @@ describe('playbackState', () => {
       assert.strictEqual(playbackReducer(undefined, '').isPlaying, false);
     });
 
-    it('sets the property to true when passed in an isPlaying action with isPlaying set to true', () => {
-      assert.strictEqual(playbackReducer(undefined, {
+    it('{isPlaying: true, isPaused: false} when isPlaying is true', () => {
+      const state = playbackReducer(undefined, {
         type: IS_PLAYING,
         isPlaying: true
-      }).isPlaying, true);
+      });
+      assert.strictEqual(state.isPlaying, true);
+      assert.strictEqual(state.isPaused, false);
     });
 
-    it('sets the property to false when passed in an isPlaying action with isPlaying set to false', () => {
-      assert.strictEqual(playbackReducer(undefined, {
+    it('{isPlaying: false, isPaused: true} when isPlaying is false', () => {
+      const state = playbackReducer(undefined, {
         type: IS_PLAYING,
         isPlaying: false
-      }).isPlaying, false);
+      });
+      assert.strictEqual(state.isPlaying, false);
+      assert.strictEqual(state.isPaused, true);
     });
   });
 
@@ -31,18 +35,22 @@ describe('playbackState', () => {
       assert.strictEqual(playbackReducer(undefined, '').isPaused, false);
     });
 
-    it('sets the property to true when passed in an isPaused action with isPaused set to true', () => {
-      assert.strictEqual(playbackReducer(undefined, {
+    it('{isPlaying: false, isPaused: true} when isPaused is true', () => {
+      const state = playbackReducer(undefined, {
         type: IS_PAUSED,
         isPaused: true
-      }).isPaused, true);
+      });
+      assert.strictEqual(state.isPaused, true);
+      assert.strictEqual(state.isPlaying, false);
     });
 
-    it('sets the property to false when passed in an isPaused action with isPaused set to false', () => {
-      assert.strictEqual(playbackReducer(undefined, {
+    it('{isPlaying: true, isPaused: false} when isPaused is false', () => {
+      const state = playbackReducer(undefined, {
         type: IS_PAUSED,
         isPaused: false
-      }).isPaused, false);
+      });
+      assert.strictEqual(state.isPaused, false);
+      assert.strictEqual(state.isPlaying, true);
     });
   });
 });
