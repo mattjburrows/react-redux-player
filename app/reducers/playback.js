@@ -49,7 +49,7 @@ function setHasStoppedState(hasStopped) {
   return newState;
 }
 
-export function setPlaybackState(state = initialState, action) {
+export function playbackReducer(state = initialState, action) {
   switch (action.type) {
     case IS_PLAYING :
       return Object.assign({}, state, setIsPlayingState(action.isPlaying));

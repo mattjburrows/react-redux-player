@@ -4,7 +4,7 @@ import assert from 'assert';
 import { IS_PLAYING } from '../../app/actions/isPlaying';
 import { IS_PAUSED } from '../../app/actions/isPaused';
 import { HAS_STOPPED } from '../../app/actions/hasStopped';
-import { setPlaybackState as playbackReducer } from '../../app/reducers/playback';
+import { playbackReducer } from '../../app/reducers/playback';
 
 describe('playbackState', () => {
   describe('isPlaying property', () => {
