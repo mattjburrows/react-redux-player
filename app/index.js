@@ -2,11 +2,11 @@
 
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Player from './containers/Player.jsx';
+import Player from './Player.jsx';
 
 ReactDOM.render(
   React.createElement(Player, {
-    src: '/SampleVideo_640x360_10mb.mp4'
+    src: './SampleVideo_640x360_10mb.mp4'
   }),
   document.getElementById('app')
 );

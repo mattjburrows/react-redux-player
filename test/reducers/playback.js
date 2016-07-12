@@ -17,6 +17,7 @@ describe('playbackState', () => {
         type: IS_PLAYING,
         isPlaying: true
       });
+
       assert.strictEqual(state.isPlaying, true);
       assert.strictEqual(state.isPaused, false);
       assert.strictEqual(state.hasStopped, false);
@@ -27,6 +28,7 @@ describe('playbackState', () => {
         type: IS_PLAYING,
         isPlaying: false
       });
+
       assert.strictEqual(state.isPlaying, false);
     });
   });
@@ -41,6 +43,7 @@ describe('playbackState', () => {
         type: IS_PAUSED,
         isPaused: true
       });
+
       assert.strictEqual(state.isPlaying, false);
       assert.strictEqual(state.isPaused, true);
       assert.strictEqual(state.hasStopped, false);
@@ -51,6 +54,7 @@ describe('playbackState', () => {
         type: IS_PAUSED,
         isPaused: false
       });
+
       assert.strictEqual(state.isPaused, false);
     });
   });
@@ -65,6 +69,7 @@ describe('playbackState', () => {
         type: HAS_STOPPED,
         hasStopped: true
       });
+
       assert.strictEqual(state.isPlaying, false);
       assert.strictEqual(state.isPaused, false);
       assert.strictEqual(state.hasStopped, true);
@@ -75,6 +80,7 @@ describe('playbackState', () => {
         type: HAS_STOPPED,
         hasStopped: false
       });
+      
       assert.strictEqual(state.hasStopped, false);
     });
   });
