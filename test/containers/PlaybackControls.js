@@ -51,7 +51,7 @@ describe('<PlaybackControls />', () => {
     });
   });
 
-  describe.only('<Volume />', () => {
+  describe('<Volume />', () => {
     it('calls the setVolumeAction', () => {
       const setVolumeActionSpy = sinon.spy();
       const wrapper = shallow(<PlaybackControls setVolumeAction={setVolumeActionSpy} />);

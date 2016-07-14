@@ -7,7 +7,7 @@ import { SET_VOLUME } from '../actions/setVolume';
 const initialState = {
   isPlaying: false,
   hasStopped: true,
-  volume: 7
+  volume: 50
 };
 
 function setIsPlayingState(isPlaying) {

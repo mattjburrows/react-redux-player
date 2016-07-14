@@ -58,17 +58,17 @@ describe('playbackState', () => {
   });
 
   describe('volume property', () => {
-    it('defaults to 7', () => {
-      assert.strictEqual(playbackReducer(undefined, '').volume, 7);
+    it('defaults to 50', () => {
+      assert.strictEqual(playbackReducer(undefined, '').volume, 50);
     });
 
-    it('{volume: 1} when action.volume is 1', () => {
+    it('{volume: 75} when action.volume is 75', () => {
       const state = playbackReducer(undefined, {
         type: SET_VOLUME,
-        volume: 1
+        volume: 75
       });
 
-      assert.strictEqual(state.volume, 1);
+      assert.strictEqual(state.volume, 75);
     });
   });
 });

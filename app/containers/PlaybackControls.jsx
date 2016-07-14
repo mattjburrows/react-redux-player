@@ -1,5 +1,6 @@
 'use strict';
 
+import _ from 'lodash';
 import React, { Component } from 'react';
 
 import { bindActionCreators } from 'redux';
@@ -22,7 +23,7 @@ export class PlaybackControls extends Component {
   }
 
   _onVolumeChange(event) {
-    const volumeValue = event.target.value;
+    const volumeValue = _.get(event, 'target.value');
     this.props.setVolumeAction(volumeValue);
   }
 
