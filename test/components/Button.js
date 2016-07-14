@@ -22,7 +22,7 @@ describe('<Button />', () => {
     const wrapper = shallow(
       <Button text={text} />
     );
-    
+
     assert.equal(wrapper.text(), text);
   });
 });

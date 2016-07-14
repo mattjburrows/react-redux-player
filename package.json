@@ -9,7 +9,8 @@
   "scripts": {
     "test": "mocha test/.setup.js test/**/*.js",
     "bundle": "webpack --progress --colors",
-    "watch": "webpack --progress --colors --watch"
+    "watch": "webpack --progress --colors --watch",
+    "lint": "eslint ."
   },
   "author": "Matthew Burrows <mattjburrows@gmail.com>",
   "license": "ISC",

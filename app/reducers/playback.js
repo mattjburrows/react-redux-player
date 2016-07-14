@@ -15,12 +15,12 @@ function setIsPlayingState(isPlaying) {
     isPlaying: isPlaying
   };
 
-  if (isPlaying === true) {
-    newState.isPaused = false;
-    newState.hasStopped = false;
-  }
+  if (isPlaying === false) return newState;
 
-  return newState;
+  return Object.assign({}, newState, {
+    isPaused: false,
+    hasStopped: false
+  });
 }
 
 function setIsPausedState(isPaused) {
@@ -28,12 +28,12 @@ function setIsPausedState(isPaused) {
     isPaused: isPaused
   };
 
-  if (isPaused === true) {
-    newState.isPlaying = false;
-    newState.hasStopped = false;
-  }
+  if (isPaused === false) return newState;
 
-  return newState;
+  return Object.assign({}, newState, {
+    isPlaying: false,
+    hasStopped: false
+  });
 }
 
 function setHasStoppedState(hasStopped) {
@@ -41,12 +41,12 @@ function setHasStoppedState(hasStopped) {
     hasStopped: hasStopped
   };
 
-  if (hasStopped === true) {
-    newState.isPlaying = false;
-    newState.isPaused = false;
-  }
+  if (hasStopped === false) return newState;
 
-  return newState;
+  return Object.assign({}, newState, {
+    isPlaying: false,
+    isPaused: false
+  });
 }
 
 export function playbackReducer(state = initialState, action) {

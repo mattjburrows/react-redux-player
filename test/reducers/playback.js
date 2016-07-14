@@ -80,7 +80,7 @@ describe('playbackState', () => {
         type: HAS_STOPPED,
         hasStopped: false
       });
-      
+
       assert.strictEqual(state.hasStopped, false);
     });
   });
