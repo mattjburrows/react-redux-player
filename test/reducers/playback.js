@@ -3,6 +3,7 @@
 import assert from 'assert';
 import { IS_PLAYING } from '../../app/actions/isPlaying';
 import { HAS_STOPPED } from '../../app/actions/hasStopped';
+import { SET_VOLUME } from '../../app/actions/setVolume';
 import { playbackReducer } from '../../app/reducers/playback';
 
 describe('playbackState', () => {
@@ -53,6 +54,21 @@ describe('playbackState', () => {
       });
 
       assert.strictEqual(state.hasStopped, false);
+    });
+  });
+
+  describe('volume property', () => {
+    it('defaults to 7', () => {
+      assert.strictEqual(playbackReducer(undefined, '').volume, 7);
+    });
+
+    it('{volume: 1} when action.volume is 1', () => {
+      const state = playbackReducer(undefined, {
+        type: SET_VOLUME,
+        volume: 1
+      });
+
+      assert.strictEqual(state.volume, 1);
     });
   });
 });

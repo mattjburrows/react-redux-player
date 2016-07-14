@@ -50,4 +50,14 @@ describe('<PlaybackControls />', () => {
       assert(hasStoppedActionSpy.calledWith(true));
     });
   });
+
+  describe.only('<Volume />', () => {
+    it('calls the setVolumeAction', () => {
+      const setVolumeActionSpy = sinon.spy();
+      const wrapper = shallow(<PlaybackControls setVolumeAction={setVolumeActionSpy} />);
+
+      wrapper.find('Volume').simulate('change');
+      assert(setVolumeActionSpy.calledOnce);
+    });
+  });
 });

@@ -7,8 +7,10 @@ import { connect } from 'react-redux';
 
 import { isPlaying } from '../actions/isPlaying';
 import { hasStopped } from '../actions/hasStopped';
+import { setVolume } from '../actions/setVolume';
 
 import Button from '../components/Button.jsx';
+import Volume from '../components/Volume.jsx';
 
 export class PlaybackControls extends Component {
   _onPlayButtonClick() {
@@ -19,6 +21,11 @@ export class PlaybackControls extends Component {
     this.props.hasStoppedAction(true);
   }
 
+  _onVolumeChange(event) {
+    const volumeValue = event.target.value;
+    this.props.setVolumeAction(volumeValue);
+  }
+
   render() {
     const text = this.props.isPlaying ? 'pause' : 'play';
 
@@ -26,6 +33,7 @@ export class PlaybackControls extends Component {
       <div>
         <Button onClick={this._onPlayButtonClick.bind(this)} text={text} />
         <Button onClick={this._onStopButtonClick.bind(this)} text="stop" />
+        <Volume onChange={this._onVolumeChange.bind(this)} />
       </div>
     );
   }
@@ -34,7 +42,8 @@ export class PlaybackControls extends Component {
 PlaybackControls.propTypes = {
   isPlaying: React.PropTypes.bool,
   isPlayingAction: React.PropTypes.func,
-  hasStoppedAction: React.PropTypes.func
+  hasStoppedAction: React.PropTypes.func,
+  setVolumeAction: React.PropTypes.func
 };
 
 function mapStateToProps(state) {
@@ -46,7 +55,8 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return {
     isPlayingAction: bindActionCreators(isPlaying, dispatch),
-    hasStoppedAction: bindActionCreators(hasStopped, dispatch)
+    hasStoppedAction: bindActionCreators(hasStopped, dispatch),
+    setVolumeAction: bindActionCreators(setVolume, dispatch)
   };
 }
 
