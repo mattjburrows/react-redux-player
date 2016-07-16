@@ -6,7 +6,7 @@ import Player from './Player.jsx';
 
 ReactDOM.render(
   React.createElement(Player, {
-    src: './SampleVideo_640x360_10mb.mp4'
+    src: './SampleVideo_720x480_1mb.mp4'
   }),
   document.getElementById('app')
 );
