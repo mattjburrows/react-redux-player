@@ -1,5 +1,7 @@
 'use strict';
 
+import { hasStopped } from '../actions/hasStopped';
+
 function setupPlayer(player) {
   return {
     play: (isPlaying) => {
@@ -11,8 +13,15 @@ function setupPlayer(player) {
         player.pause();
         player.currentTime = 0;
       }
+    },
+    volume: (volume) => {
+      player.volume = volume / 100;
     }
   };
+}
+
+function setupDispatch(store, player) {
+  player.addEventListener('ended', () => store.dispatch(hasStopped(true)));
 }
 
 function isPlayingChanged(previousState, currentState) {
@@ -23,9 +32,15 @@ function hasStoppedChanged(previousState, currentState) {
   return (previousState.playback.hasStopped !== currentState.playback.hasStopped);
 }
 
+function volumeChanged(previousState, currentState) {
+  return (previousState.playback.volume !== currentState.playback.volume);
+}
+
 export default (store, video) => {
   const player = setupPlayer(video);
   let currentState = store.getState();
+
+  setupDispatch(store, video);
 
   return store.subscribe(() => {
     const previousState = currentState;
@@ -33,5 +48,6 @@ export default (store, video) => {
 
     if (isPlayingChanged(previousState, currentState)) player.play(currentState.playback.isPlaying);
     if (hasStoppedChanged(previousState, currentState)) player.stop(currentState.playback.hasStopped);
+    if (volumeChanged(previousState, currentState)) player.volume(currentState.playback.volume);
   });
 };
