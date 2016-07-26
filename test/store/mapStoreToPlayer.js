@@ -6,6 +6,9 @@ import _ from 'lodash';
 
 import configureStore from '../../app/store/configurePlayerStore';
 import mapStoreToPlayer from '../../app/store/mapStoreToPlayer';
+import { HAS_STOPPED } from '../../app/actions/hasStopped';
+import { SET_PROGRESS } from '../../app/actions/setProgress';
+import { SET_DURATION } from '../../app/actions/setDuration';
 
 const store = configureStore();
 const sandbox = sinon.sandbox.create();
@@ -127,7 +130,7 @@ describe('mapStoreToPlayer', () => {
       const player = setupPlayer();
       const unsubscribe = mapStoreToPlayer(store, player);
       const expectedCallArgs = {
-        type: 'HAS_STOPPED',
+        type: HAS_STOPPED,
         hasStopped: true
       };
 
@@ -143,11 +146,26 @@ describe('mapStoreToPlayer', () => {
       });
       const unsubscribe = mapStoreToPlayer(store, player);
       const expectedCallArgs = {
-        type: 'SET_PROGRESS',
+        type: SET_PROGRESS,
         progress: 75
       };
 
       player.timeupdate();
+      assert(store.dispatch.calledWith(expectedCallArgs));
+
+      unsubscribe();
+    });
+
+    it('dispatched SET_DURATION: {NUMBER} when the player is loaded', () => {
+      const player = setupPlayer({
+        duration: 75
+      });
+      const unsubscribe = mapStoreToPlayer(store, player);
+      const expectedCallArgs = {
+        type: SET_DURATION,
+        duration: 75
+      };
+
       assert(store.dispatch.calledWith(expectedCallArgs));
 
       unsubscribe();
