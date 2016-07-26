@@ -2,6 +2,7 @@
 
 import assert from 'assert';
 import sinon from 'sinon';
+import _ from 'lodash';
 
 import configureStore from '../../app/store/configurePlayerStore';
 import mapStoreToPlayer from '../../app/store/mapStoreToPlayer';
@@ -9,11 +10,10 @@ import mapStoreToPlayer from '../../app/store/mapStoreToPlayer';
 const store = configureStore();
 const sandbox = sinon.sandbox.create();
 
-function setupPlayer() {
+function setupPlayer(params) {
   const playSpy = sinon.spy();
   const pauseSpy = sinon.spy();
-
-  return {
+  const player = {
     play: playSpy,
     pause: pauseSpy,
     playSpy: playSpy,
@@ -22,6 +22,8 @@ function setupPlayer() {
       this[name] = cb;
     }
   };
+
+  return _.assign(player, params);
 }
 
 describe('mapStoreToPlayer', () => {
@@ -117,14 +119,36 @@ describe('mapStoreToPlayer', () => {
   });
 
   describe('player events', () => {
-    beforeEach(() => sinon.stub(store, 'dispatch'));
+    beforeEach(() => {
+      sandbox.stub(store, 'dispatch');
+    });
 
     it('dispatches HAS_STOPPED: true when the player ends', () => {
       const player = setupPlayer();
       const unsubscribe = mapStoreToPlayer(store, player);
+      const expectedCallArgs = {
+        type: 'HAS_STOPPED',
+        hasStopped: true
+      };
 
       player.ended();
-      assert(store.dispatch.calledOnce);
+      assert(store.dispatch.calledWith(expectedCallArgs));
+
+      unsubscribe();
+    });
+
+    it('dispatched SET_PROGRESS: {NUMBER} when the timeupdate event is triggered', () => {
+      const player = setupPlayer({
+        currentTime: 75
+      });
+      const unsubscribe = mapStoreToPlayer(store, player);
+      const expectedCallArgs = {
+        type: 'SET_PROGRESS',
+        progress: 75
+      };
+
+      player.timeupdate();
+      assert(store.dispatch.calledWith(expectedCallArgs));
 
       unsubscribe();
     });

@@ -1,6 +1,7 @@
 'use strict';
 
 import { hasStopped } from '../actions/hasStopped';
+import { setProgress } from '../actions/setProgress';
 
 function setupPlayer(player) {
   return {
@@ -22,6 +23,7 @@ function setupPlayer(player) {
 
 function setupDispatch(store, player) {
   player.addEventListener('ended', () => store.dispatch(hasStopped(true)));
+  player.addEventListener('timeupdate', () => store.dispatch(setProgress(player.currentTime)));
 }
 
 function isPlayingChanged(previousState, currentState) {
