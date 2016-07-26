@@ -5,6 +5,7 @@ import { IS_PLAYING } from '../../app/actions/isPlaying';
 import { HAS_STOPPED } from '../../app/actions/hasStopped';
 import { SET_VOLUME } from '../../app/actions/setVolume';
 import { SET_PROGRESS } from '../../app/actions/setProgress';
+import { SET_DURATION } from '../../app/actions/setDuration';
 import { playbackReducer } from '../../app/reducers/playback';
 
 describe('playbackState', () => {
@@ -85,6 +86,21 @@ describe('playbackState', () => {
       });
 
       assert.strictEqual(state.progress, 75);
+    });
+  });
+
+  describe('duration property', () => {
+    it('defaults to 0', () => {
+      assert.strictEqual(playbackReducer(undefined, '').duration, 0);
+    });
+
+    it('sets {duration: 75} when action.duration is 75', () => {
+      const state = playbackReducer(undefined, {
+        type: SET_DURATION,
+        duration: 75
+      });
+
+      assert.strictEqual(state.duration, 75);
     });
   });
 });
