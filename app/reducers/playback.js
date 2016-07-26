@@ -3,11 +3,13 @@
 import { IS_PLAYING } from '../actions/isPlaying';
 import { HAS_STOPPED } from '../actions/hasStopped';
 import { SET_VOLUME } from '../actions/setVolume';
+import { SET_PROGRESS } from '../actions/setProgress';
 
 const initialState = {
   isPlaying: false,
   hasStopped: true,
-  volume: 50
+  volume: 50,
+  progress: 0
 };
 
 function setIsPlayingState(isPlaying) {
@@ -40,6 +42,12 @@ function setVolumeState(volume) {
   };
 }
 
+function setProgressState(progress) {
+  return {
+    progress: progress
+  };
+}
+
 export function playbackReducer(state = initialState, action) {
   switch (action.type) {
     case IS_PLAYING :
@@ -48,6 +56,8 @@ export function playbackReducer(state = initialState, action) {
       return Object.assign({}, state, setHasStoppedState(action.hasStopped));
     case SET_VOLUME :
       return Object.assign({}, state, setVolumeState(action.volume));
+    case SET_PROGRESS :
+      return Object.assign({}, state, setProgressState(action.progress));
     default:
       return state;
   }

@@ -4,6 +4,7 @@ import assert from 'assert';
 import { IS_PLAYING } from '../../app/actions/isPlaying';
 import { HAS_STOPPED } from '../../app/actions/hasStopped';
 import { SET_VOLUME } from '../../app/actions/setVolume';
+import { SET_PROGRESS } from '../../app/actions/setProgress';
 import { playbackReducer } from '../../app/reducers/playback';
 
 describe('playbackState', () => {
@@ -62,13 +63,28 @@ describe('playbackState', () => {
       assert.strictEqual(playbackReducer(undefined, '').volume, 50);
     });
 
-    it('{volume: 75} when action.volume is 75', () => {
+    it('sets {volume: 75} when action.volume is 75', () => {
       const state = playbackReducer(undefined, {
         type: SET_VOLUME,
         volume: 75
       });
 
       assert.strictEqual(state.volume, 75);
+    });
+  });
+
+  describe('progress property', () => {
+    it('defaults to 0', () => {
+      assert.strictEqual(playbackReducer(undefined, '').progress, 0);
+    });
+
+    it('sets {progress: 75} when action.progress is 75', () => {
+      const state = playbackReducer(undefined, {
+        type: SET_PROGRESS,
+        progress: 75
+      });
+
+      assert.strictEqual(state.progress, 75);
     });
   });
 });
