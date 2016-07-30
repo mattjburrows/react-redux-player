@@ -15,13 +15,13 @@ describe('<Progress />', () => {
     assert.equal(wrapper.find('progress').prop('max'), 100);
   });
 
-  it('adds 35 as the value on the progress tag', () => {
-    const currentTime = 666;
+  it('adds 50 as the value on the progress tag', () => {
+    const currentTime = 1000;
     const duration = 2000;
     const wrapper = shallow(
       <Progress currentTime={currentTime} duration={duration} />
     );
 
-    assert.equal(wrapper.find('progress').prop('value'), 34);
+    assert.equal(wrapper.find('progress').prop('value'), 50);
   });
 });

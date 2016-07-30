@@ -7,11 +7,10 @@ function workOutProgressValue(duration, currentTime) {
   const remainingTime = (duration - difference);
   const progressPercentage = (remainingTime / duration) * 100;
 
-  return Math.ceil(progressPercentage);
+  return progressPercentage;
 }
 
 class Progress extends Component {
-
   render() {
     const progress = workOutProgressValue(this.props.duration, this.props.currentTime);
 

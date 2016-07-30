@@ -25,7 +25,7 @@ function setupPlayer(player) {
 function setupDispatch(store, player) {
   player.addEventListener('ended', () => store.dispatch(hasStopped(true)));
   player.addEventListener('loadedmetadata', () => {
-    const duration = Math.ceil(parseFloat(player.duration));
+    const duration = parseFloat(player.duration);
     store.dispatch(setDuration(duration));
   });
   player.addEventListener('timeupdate', () => {
