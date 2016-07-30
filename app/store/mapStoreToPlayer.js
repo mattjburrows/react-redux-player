@@ -23,10 +23,15 @@ function setupPlayer(player) {
 }
 
 function setupDispatch(store, player) {
-  store.dispatch(setDuration(player.duration));
-
   player.addEventListener('ended', () => store.dispatch(hasStopped(true)));
-  player.addEventListener('timeupdate', () => store.dispatch(setCurrentTime(player.currentTime)));
+  player.addEventListener('loadedmetadata', () => {
+    const duration = Math.ceil(parseFloat(player.duration));
+    store.dispatch(setDuration(duration));
+  });
+  player.addEventListener('timeupdate', () => {
+    const currentTime = parseFloat(player.currentTime);
+    store.dispatch(setCurrentTime(currentTime));
+  });
 }
 
 function isPlayingChanged(previousState, currentState) {

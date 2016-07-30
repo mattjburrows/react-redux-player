@@ -158,7 +158,7 @@ describe('mapStoreToPlayer', () => {
 
     it('dispatched SET_DURATION: {NUMBER} when the player is loaded', () => {
       const player = setupPlayer({
-        duration: 75
+        duration: 74.5
       });
       const unsubscribe = mapStoreToPlayer(store, player);
       const expectedCallArgs = {
@@ -166,6 +166,7 @@ describe('mapStoreToPlayer', () => {
         duration: 75
       };
 
+      player.loadedmetadata();
       assert(store.dispatch.calledWith(expectedCallArgs));
 
       unsubscribe();
