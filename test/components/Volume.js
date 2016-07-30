@@ -7,11 +7,12 @@ import sinon from 'sinon';
 
 import Volume from '../../app/components/Volume.jsx';
 
+const VALUE = 5;
+
 describe('<Volume />', () => {
   it('renders the volume control with the default values', () => {
-    const value = 5;
     const wrapper = shallow(
-      <Volume value={value} onChange={() => {}} />
+      <Volume value={VALUE} onChange={() => {}} />
     );
     const input = wrapper.find('input');
 
@@ -21,9 +22,8 @@ describe('<Volume />', () => {
   });
 
   it('renders the volume control with the correct value', () => {
-    const value = 5;
     const wrapper = shallow(
-      <Volume value={value} onChange={() => {}} />
+      <Volume value={VALUE} onChange={() => {}} />
     );
 
     assert.equal(wrapper.find('input').prop('value'), 5);
@@ -32,7 +32,7 @@ describe('<Volume />', () => {
   it('calls the onChange function', () => {
     const onChangeSpy = sinon.spy();
     const wrapper = shallow(
-      <Volume onChange={onChangeSpy} />
+      <Volume value={VALUE} onChange={onChangeSpy} />
     );
     wrapper.find('input').simulate('change');
     assert.equal(onChangeSpy.calledOnce, true);
