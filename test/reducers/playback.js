@@ -4,7 +4,7 @@ import assert from 'assert';
 import { IS_PLAYING } from '../../app/actions/isPlaying';
 import { HAS_STOPPED } from '../../app/actions/hasStopped';
 import { SET_VOLUME } from '../../app/actions/setVolume';
-import { SET_PROGRESS } from '../../app/actions/setProgress';
+import { SET_CURRENT_TIME } from '../../app/actions/setCurrentTime';
 import { SET_DURATION } from '../../app/actions/setDuration';
 import { playbackReducer } from '../../app/reducers/playback';
 
@@ -74,18 +74,18 @@ describe('playbackState', () => {
     });
   });
 
-  describe('progress property', () => {
+  describe('currentTime property', () => {
     it('defaults to 0', () => {
-      assert.strictEqual(playbackReducer(undefined, '').progress, 0);
+      assert.strictEqual(playbackReducer(undefined, '').currentTime, 0);
     });
 
-    it('sets {progress: 75} when action.progress is 75', () => {
+    it('sets {currentTime: 75} when action.currentTime is 75', () => {
       const state = playbackReducer(undefined, {
-        type: SET_PROGRESS,
-        progress: 75
+        type: SET_CURRENT_TIME,
+        currentTime: 75
       });
 
-      assert.strictEqual(state.progress, 75);
+      assert.strictEqual(state.currentTime, 75);
     });
   });
 

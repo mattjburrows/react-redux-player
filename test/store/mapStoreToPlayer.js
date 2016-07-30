@@ -7,7 +7,7 @@ import _ from 'lodash';
 import configureStore from '../../app/store/configurePlayerStore';
 import mapStoreToPlayer from '../../app/store/mapStoreToPlayer';
 import { HAS_STOPPED } from '../../app/actions/hasStopped';
-import { SET_PROGRESS } from '../../app/actions/setProgress';
+import { SET_CURRENT_TIME } from '../../app/actions/setCurrentTime';
 import { SET_DURATION } from '../../app/actions/setDuration';
 
 const store = configureStore();
@@ -140,14 +140,14 @@ describe('mapStoreToPlayer', () => {
       unsubscribe();
     });
 
-    it('dispatched SET_PROGRESS: {NUMBER} when the timeupdate event is triggered', () => {
+    it('dispatched SET_CURRENT_TIME: {NUMBER} when the timeupdate event is triggered', () => {
       const player = setupPlayer({
         currentTime: 75
       });
       const unsubscribe = mapStoreToPlayer(store, player);
       const expectedCallArgs = {
-        type: SET_PROGRESS,
-        progress: 75
+        type: SET_CURRENT_TIME,
+        currentTime: 75
       };
 
       player.timeupdate();

@@ -3,14 +3,14 @@
 import { IS_PLAYING } from '../actions/isPlaying';
 import { HAS_STOPPED } from '../actions/hasStopped';
 import { SET_VOLUME } from '../actions/setVolume';
-import { SET_PROGRESS } from '../actions/setProgress';
+import { SET_CURRENT_TIME } from '../actions/setCurrentTime';
 import { SET_DURATION } from '../actions/setDuration';
 
 const initialState = {
   isPlaying: false,
   hasStopped: true,
   volume: 50,
-  progress: 0,
+  currentTime: 0,
   duration: 0
 };
 
@@ -44,9 +44,9 @@ function setVolumeState(volume) {
   };
 }
 
-function setProgressState(progress) {
+function setCurrentTimeState(currentTime) {
   return {
-    progress: progress
+    currentTime: currentTime
   };
 }
 
@@ -64,8 +64,8 @@ export function playbackReducer(state = initialState, action) {
       return Object.assign({}, state, setHasStoppedState(action.hasStopped));
     case SET_VOLUME :
       return Object.assign({}, state, setVolumeState(action.volume));
-    case SET_PROGRESS :
-      return Object.assign({}, state, setProgressState(action.progress));
+    case SET_CURRENT_TIME :
+      return Object.assign({}, state, setCurrentTimeState(action.currentTime));
     case SET_DURATION :
       return Object.assign({}, state, setDurationState(action.duration));
     default:
