@@ -12,6 +12,7 @@ import { setVolume } from '../actions/setVolume';
 
 import Button from '../components/Button.jsx';
 import Volume from '../components/Volume.jsx';
+import Progress from '../components/Progress.jsx';
 
 export class PlaybackControls extends Component {
   _onPlayButtonClick() {
@@ -28,12 +29,14 @@ export class PlaybackControls extends Component {
   }
 
   render() {
-    const text = this.props.isPlaying ? 'pause' : 'play';
+    const playPauseButtonText = this.props.isPlaying ? 'pause' : 'play';
+    const stopButtonText = 'stop';
 
     return (
       <div>
-        <Button onClick={this._onPlayButtonClick.bind(this)} text={text} />
-        <Button onClick={this._onStopButtonClick.bind(this)} text="stop" />
+        <Progress currentTime={this.props.currentTime} duration={this.props.duration} />
+        <Button onClick={this._onPlayButtonClick.bind(this)} text={playPauseButtonText} />
+        <Button onClick={this._onStopButtonClick.bind(this)} text={stopButtonText} />
         <Volume onChange={this._onVolumeChange.bind(this)} />
       </div>
     );
@@ -44,12 +47,16 @@ PlaybackControls.propTypes = {
   isPlaying: React.PropTypes.bool,
   isPlayingAction: React.PropTypes.func,
   hasStoppedAction: React.PropTypes.func,
-  setVolumeAction: React.PropTypes.func
+  setVolumeAction: React.PropTypes.func,
+  duration: React.PropTypes.number,
+  currentTime: React.PropTypes.number
 };
 
 function mapStateToProps(state) {
   return {
-    isPlaying: state.playback.isPlaying
+    isPlaying: state.playback.isPlaying,
+    duration: state.playback.duration,
+    currentTime: state.playback.currentTime
   };
 }
 
