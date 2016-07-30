@@ -22,7 +22,7 @@ Volume.defaultProps = {
 
 Volume.propTypes = {
   onChange: React.PropTypes.func.isRequired,
-  value: React.PropTypes.number.isRequired,
+  value: React.PropTypes.number,
   min: React.PropTypes.number,
   max: React.PropTypes.number,
   step: React.PropTypes.number
