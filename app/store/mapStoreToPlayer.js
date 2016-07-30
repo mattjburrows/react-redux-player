@@ -51,8 +51,8 @@ export default (store, video) => {
     const previousState = currentState;
     currentState = store.getState();
 
-    if (isPlayingChanged(previousState, currentState)) player.play(currentState.playback.isPlaying);
-    if (hasStoppedChanged(previousState, currentState)) player.stop(currentState.playback.hasStopped);
-    if (volumeChanged(previousState, currentState)) player.volume(currentState.playback.volume);
+    if (isPlayingChanged(previousState, currentState)) return player.play(currentState.playback.isPlaying);
+    if (hasStoppedChanged(previousState, currentState)) return player.stop(currentState.playback.hasStopped);
+    if (volumeChanged(previousState, currentState)) return player.volume(currentState.playback.volume);
   });
 };
