@@ -6,6 +6,7 @@ import { HAS_STOPPED } from '../../app/actions/hasStopped';
 import { SET_VOLUME } from '../../app/actions/setVolume';
 import { SET_CURRENT_TIME } from '../../app/actions/setCurrentTime';
 import { SET_DURATION } from '../../app/actions/setDuration';
+import { SET_FULLSCREEN } from '../../app/actions/setFullscreen';
 import { playbackReducer } from '../../app/reducers/playback';
 
 describe('playbackState', () => {
@@ -101,6 +102,21 @@ describe('playbackState', () => {
       });
 
       assert.strictEqual(state.duration, 75);
+    });
+  });
+
+  describe('fullscreen property', () => {
+    it('defaults to false', () => {
+      assert.strictEqual(playbackReducer(undefined, '').fullscreen, false);
+    });
+
+    it('sets {fullscreen: true} when action.fullscreen is true', () => {
+      const state = playbackReducer(undefined, {
+        type: SET_FULLSCREEN,
+        fullscreen: true
+      });
+
+      assert.strictEqual(state.fullscreen, true);
     });
   });
 });
