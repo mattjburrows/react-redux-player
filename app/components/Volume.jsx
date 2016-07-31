@@ -9,7 +9,14 @@ class Volume extends Component {
 
   render() {
     return (
-      <input type="range" value={this.props.value} min={this.props.min} max={this.props.max} step={this.props.step} onChange={this.props.onChange} />
+      <input
+        type="range"
+        value={this.props.value}
+        min={this.props.min}
+        max={this.props.max}
+        step={this.props.step}
+        onChange={this.props.onChange}
+        name="volume" />
     );
   }
 }
