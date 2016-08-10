@@ -8,9 +8,9 @@ import sinon from 'sinon';
 import { PlaybackControls } from '../../app/containers/PlaybackControls.jsx';
 
 describe('<PlaybackControls />', () => {
-  it('should render 2 <Button /> components', () => {
+  it('should render 3 <Button /> components', () => {
     const wrapper = mount(<PlaybackControls />);
-    assert.equal(wrapper.find('Button').length, 2);
+    assert.equal(wrapper.find('Button').length, 3);
   });
 
   describe('<Progress />', () => {
@@ -59,6 +59,22 @@ describe('<PlaybackControls />', () => {
 
       wrapper.find('Button').at(1).simulate('click');
       assert(hasStoppedActionSpy.calledWith(true));
+    });
+  });
+
+  describe('fullscreen <Button />', () => {
+    it('sets fullscreen as the button text', () => {
+      const wrapper = mount(<PlaybackControls isPlaying={true} />);
+
+      assert.equal(wrapper.find('Button').get(2).props.text, 'fullscreen');
+    });
+
+    it('calls the setFullscreen with true when the button is clicked', () => {
+      const setFullscreenSpy = sinon.spy();
+      const wrapper = mount(<PlaybackControls fullscreen={false} setFullscreenAction={setFullscreenSpy} />);
+
+      wrapper.find('Button').at(2).simulate('click');
+      assert(setFullscreenSpy.calledWith(true));
     });
   });
 
