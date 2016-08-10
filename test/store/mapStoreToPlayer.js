@@ -16,13 +16,17 @@ const sandbox = sinon.sandbox.create();
 function setupPlayer(params) {
   const playSpy = sinon.spy();
   const pauseSpy = sinon.spy();
+  const eventMapper = {};
   const player = {
     play: playSpy,
     pause: pauseSpy,
     playSpy: playSpy,
     pauseSpy: pauseSpy,
     addEventListener: function addEventListener(name, cb) {
-      this[name] = cb;
+      if (!eventMapper[name]) eventMapper[name] = [];
+      eventMapper[name].push(cb);
+
+      this[name] = () => _.each(eventMapper[name], (func) => func());
     }
   };
 
