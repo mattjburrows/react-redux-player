@@ -36,7 +36,7 @@ export class PlaybackControls extends Component {
   render() {
     const playPauseButtonText = this.props.isPlaying ? 'pause' : 'play';
     const stopButtonText = 'stop';
-    const fullscreenText = 'fullscreen';
+    const fullscreenText = this.props.fullscreen ? 'exit fullscreen' : 'enter fullscreen';
 
     return (
       <div>

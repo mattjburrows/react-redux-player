@@ -62,11 +62,17 @@ describe('<PlaybackControls />', () => {
     });
   });
 
-  describe('fullscreen <Button />', () => {
-    it('sets fullscreen as the button text', () => {
-      const wrapper = mount(<PlaybackControls isPlaying={true} />);
+  describe.only('fullscreen <Button />', () => {
+    it('sets "enter fullscreen" as the button text', () => {
+      const wrapper = mount(<PlaybackControls isPlaying={true} fullscreen={false} />);
 
-      assert.equal(wrapper.find('Button').get(2).props.text, 'fullscreen');
+      assert.equal(wrapper.find('Button').get(2).props.text, 'enter fullscreen');
+    });
+
+    it('sets "exit fullscreen" as the button text', () => {
+      const wrapper = mount(<PlaybackControls isPlaying={true} fullscreen={true} />);
+
+      assert.equal(wrapper.find('Button').get(2).props.text, 'exit fullscreen');
     });
 
     it('calls the setFullscreen with true when the button is clicked', () => {
