@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 
 import configureStore from './store/configurePlayerStore';
+import Fullscreen from './containers/Fullscreen.jsx';
 import PlaybackControls from './containers/PlaybackControls.jsx';
 import mapStoreToPlayer from './store/mapStoreToPlayer';
 
@@ -16,12 +17,12 @@ class Player extends Component {
 
   render() {
     return (<Provider store={store}>
-      <div>
+      <Fullscreen>
         <video ref="video">
           <source src={this.props.src} />
         </video>
         <PlaybackControls />
-      </div>
+      </Fullscreen>
     </Provider>);
   }
 }

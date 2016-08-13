@@ -62,7 +62,7 @@ describe('<PlaybackControls />', () => {
     });
   });
 
-  describe.only('fullscreen <Button />', () => {
+  describe('fullscreen <Button />', () => {
     it('sets "enter fullscreen" as the button text', () => {
       const wrapper = mount(<PlaybackControls isPlaying={true} fullscreen={false} />);
 
